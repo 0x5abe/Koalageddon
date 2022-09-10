@@ -16,15 +16,23 @@ auto isAppBlacklisted(int appID)
 	return vectorContains(config->platformRefs.Steam.app_blacklist, std::to_string(appID));
 }
 
+auto isAppWhitelisted (int appID)
+{
+	if (config->platformRefs.Steam.app_whitelist.size() > 0) {
+		return vectorContains(config->platformRefs.Steam.app_whitelist, std::to_string(appID));
+	}
+	return true;
+}
+
 /// DLC Unlocking hooks
 
 HOOK_SPEC(bool) IsAppDLCEnabled(PARAMS(int appID, int dlcID))
 {
 	bool enabled;
 
-	if(isAppBlacklisted(appID))
+	if(isAppBlacklisted(appID) || !isAppWhitelisted(appID))
 	{
-		logger->debug("IsAppDLCEnabled -> Blacklisted AppID. Redirecting to original.");
+		logger->debug("IsAppDLCEnabled -> Blacklisted/Not whitelisted AppID. Redirecting to original.");
 		static auto original = GET_ORIGINAL_FUNC(IsAppDLCEnabled);
 		enabled = original(ARGS(appID, dlcID));
 	}
@@ -40,9 +48,9 @@ HOOK_SPEC(bool) IsAppDLCEnabled(PARAMS(int appID, int dlcID))
 HOOK_SPEC(bool) IsSubscribedApp(PARAMS(int appID))
 {
 	bool subscribed;
-	if(isAppBlacklisted(appID))
+	if(isAppBlacklisted(appID) || !isAppWhitelisted(appID))
 	{
-		logger->debug("GetDLCDataByIndex -> Blacklisted AppID. Redirecting to original.");
+		logger->debug("GetDLCDataByIndex -> Blacklisted/Not whitelisted AppID. Redirecting to original.");
 		static auto original = GET_ORIGINAL_FUNC(IsSubscribedApp);
 		subscribed = original(ARGS(appID));
 	}
@@ -60,9 +68,9 @@ HOOK_SPEC(bool) GetDLCDataByIndex(PARAMS(int appID, int index, int* pDlcID, bool
 	static auto original = GET_ORIGINAL_FUNC(GetDLCDataByIndex);
 	auto result = original(ARGS(appID, index, pDlcID, pbAvailable, pchName, bufferSize));
 
-	if(isAppBlacklisted(appID))
+	if(isAppBlacklisted(appID) || !isAppWhitelisted(appID))
 	{
-		logger->debug("GetDLCDataByIndex -> Blacklisted AppID. Skipping any modifications.");
+		logger->debug("GetDLCDataByIndex -> Blacklisted/Not whitelisted AppID. Skipping any modifications.");
 	}
 	else if(result) 
 	{

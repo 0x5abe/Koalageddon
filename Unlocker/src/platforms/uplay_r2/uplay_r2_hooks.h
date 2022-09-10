@@ -12,6 +12,21 @@ enum class ProductType
 	Item = 4
 };
 
+template<typename OStream>
+OStream& operator<<(OStream& os, const ProductType& productType)
+{
+	switch (productType) {
+	case ProductType::App:
+		return os << "App";
+	case ProductType::DLC:
+		return os << "DLC";
+	case ProductType::Item:
+		return os << "Item";
+	default:
+		return os << "Not defined, add definition for type in 'uplay_r2_hooks.h'";
+	}
+}
+
 struct Product
 {
 	Product(uint32_t appid, ProductType type)

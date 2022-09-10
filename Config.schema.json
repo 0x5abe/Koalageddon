@@ -101,6 +101,14 @@
 								"title": "App ID"
 							}
 						},
+						"app_whitelist": {
+							"$ref": "#/definitions/string_array",
+							"title": "App Whitelist",
+							"description": "Only the DLCs of apps in here will be altered. You can get the App ID from SteamDB.",
+							"items": {
+								"title": "App ID"
+							}
+						},
 						"blacklist": {
 							"description": "By default Koalageddon will try to unlock all DLCs that it can. However, if you wish for some DLCs to be locked, you can add corresponding DLC ID into this list. You can get DLC ID from SteamDB."
 						}
@@ -108,7 +116,8 @@
 					"required": [
 						"unlock_dlc",
 						"unlock_shared_library",
-						"app_blacklist"
+						"app_blacklist",
+						"app_whitelist"
 					]
 				},
 				"EpicGames": {

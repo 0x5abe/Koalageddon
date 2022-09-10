@@ -13,7 +13,7 @@ bool SteamClient::fetchAndCachePatterns() const {
 	if (res.status_code != 200) {
 		logger->error(
 			"Failed to fetch SteamClient patterns. ErrorCode: {}. StatusCode: {}. Message: {}",
-			res.error.code, res.status_code, res.error.message
+			errorCodeToString(res.error.code), res.status_code, res.error.message
 		);
 		return false;
 	}

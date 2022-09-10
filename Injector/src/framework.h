@@ -5,3 +5,5 @@
 
 #include <string>
 #include <filesystem>
+
+#define FMT_DEPRECATED_OSTREAM

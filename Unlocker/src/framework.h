@@ -16,4 +16,6 @@
 #include <polyhook2/Virtuals/VFuncSwapHook.hpp>
 #include <polyhook2/Virtuals/VTableSwapHook.hpp>
 
+#define FMT_DEPRECATED_OSTREAM
+
 #pragma warning(pop)

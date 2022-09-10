@@ -18,3 +18,5 @@
 #include <functional>
 
 using std::function;
+
+#define FMT_DEPRECATED_OSTREAM

@@ -6,3 +6,5 @@
 #include <filesystem>
 
 #include "version_exports.h"
+
+#define FMT_DEPRECATED_OSTREAM

@@ -11,6 +11,26 @@ enum class Action
 	NOTHING_TO_INSTALL = 1004,
 };
 
+
+template<typename OStream>
+OStream& operator<<(OStream& os, const Action& action)
+{
+	switch (action) {
+	case Action::NO_ACTION:
+		return os << "NO ACTION";
+	case Action::UNEXPECTED_ERROR:
+		return os << "UNEXPECTED ERROR";
+	case Action::INSTALL_INTEGRATIONS:
+		return os << "INSTALL INTEGRATIONS";
+	case Action::REMOVE_INTEGRATIONS:
+		return os << "REMOVE INTEGRATIONS";
+	case Action::NOTHING_TO_INSTALL:
+		return os << "NOTHING TO INSTALL";
+	default:
+		return os << "Not defined, add definition for type in 'IntegrationWizard.h'";
+	}
+}
+
 namespace IntegrationWizard
 {
 

@@ -11,6 +11,7 @@
 			"app_blacklist": [
 				"976310" // Mortal Kombat 11
 			],
+			"app_whitelist": [],
 			"blacklist": [ // Get App ID from SteamDB
 				"22618", // Alien Breed: Impact - PL Check [Do not force polish language]
 				"67379" // Darkness II Low Violence [Do not censor violence]

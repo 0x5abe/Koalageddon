@@ -46,3 +46,49 @@ void init(string loggerName, bool truncate)
 }
 
 shared_ptr<spdlog::logger> logger = spdlog::null_logger_mt("null");
+
+string errorCodeToString(const cpr::ErrorCode& errorCode) {
+	switch (errorCode)
+	{
+	case cpr::ErrorCode::OK:
+		return "OK";
+	case cpr::ErrorCode::CONNECTION_FAILURE:
+		return "Connection Failure";
+	case cpr::ErrorCode::EMPTY_RESPONSE:
+		return "Empty response";
+	case cpr::ErrorCode::HOST_RESOLUTION_FAILURE:
+		return "Host resolution failure";
+	case cpr::ErrorCode::INTERNAL_ERROR:
+		return "Internal error";
+	case cpr::ErrorCode::INVALID_URL_FORMAT:
+		return "Invalid url format";
+	case cpr::ErrorCode::NETWORK_RECEIVE_ERROR:
+		return "Network recieve error";
+	case cpr::ErrorCode::NETWORK_SEND_FAILURE:
+		return "Network send failure";
+	case cpr::ErrorCode::OPERATION_TIMEDOUT:
+		return "Operation timed out";
+	case cpr::ErrorCode::PROXY_RESOLUTION_FAILURE:
+		return "Proxy resolution failure";
+	case cpr::ErrorCode::SSL_CONNECT_ERROR:
+		return "SSL connect error";
+	case cpr::ErrorCode::SSL_LOCAL_CERTIFICATE_ERROR:
+		return "SSL local certificate error";
+	case cpr::ErrorCode::SSL_REMOTE_CERTIFICATE_ERROR:
+		return "SSL remote certificate error";
+	case cpr::ErrorCode::SSL_CACERT_ERROR:
+		return "SSL cacert error";
+	case cpr::ErrorCode::GENERIC_SSL_ERROR:
+		return "Generic SSL error";
+	case cpr::ErrorCode::UNSUPPORTED_PROTOCOL:
+		return "Unsupported protocol";
+	case cpr::ErrorCode::REQUEST_CANCELLED:
+		return "Request cancelled";
+	case cpr::ErrorCode::TOO_MANY_REDIRECTS:
+		return "Too many redirects";
+	case cpr::ErrorCode::UNKNOWN_ERROR:
+		return "Unknown error";
+	default:
+		return "Unknown enum value, check errorCodeToString function";
+	}
+}
